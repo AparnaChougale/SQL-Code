@@ -1,0 +1,218 @@
+/*
+Create Table
+*/
+
+create table EmployeeDemographics
+(EmployeeID int,
+FirstName varchar(50),
+LastName varchar(50),
+Age int,
+Gender varchar(50)
+)
+
+create table EmployeeSalary
+(EmployeeID int,
+JobTitle varchar(50),
+Salary int)
+
+/*
+Insert values to the table
+*/
+
+insert into EmployeeDemographics values
+(1001, 'Jim', 'Ross', 30, 'Male')
+
+insert into EmployeeDemographics values
+(1002, 'Pam', 'Beasley', 30, 'Female'),
+(1003, 'Dwight', 'Schrute', 29, 'Male'),
+(1004, 'Angela', 'Martin', 31, 'Female'),
+(1005, 'Toby', 'Flenderson', 32, 'Male'),
+(1006, 'Michael', 'Scott', 35, 'Male'),
+(1007, 'Meredith', 'Palmer', 32, 'Female'),
+(1008, 'Stanley', 'Hudson', 38, 'Male'),
+(1009, 'Kevin', 'Malone', 31, 'Male')
+
+insert into EmployeeSalary values
+(1001,'Salesman', 45000)
+
+insert into EmployeeSalary values
+(1002, 'Receptionist', 36000),
+(1003, 'Salesman', 63000),
+(1004, 'Accountant', 47000),
+(1005, 'HR', 50000),
+(1006, 'Regional Manager', 65000),
+(1007, 'Supplier Relations', 41000),
+(1008, 'Salesman', 48000),
+(1009, 'Accountant', 42000)
+
+
+/*
+ Select Statement
+ *, Top, Distinct, Count, As, Max, Min, Avg
+*/
+
+select *
+from EmployeeDemographics
+
+select FirstName, LastName
+from EmployeeDemographics
+
+select top 5 *
+from EmployeeDemographics
+
+select distinct(EmployeeID)
+from EmployeeDemographics
+
+select distinct(Gender)
+from EmployeeDemographics
+
+select count(LastName) As LastNameCount
+from EmployeeDemographics
+
+select Max(Salary)
+from EmployeeSalary
+
+select Min(Salary)
+from EmployeeSalary
+
+select Avg(Salary)
+from EmployeeSalary
+
+
+/*
+if anyother database is selected from available databases list, requered to use the path( database.dbo.tablename)
+*/
+
+select *
+from SQLTutorial.dbo.EmployeeSalary
+
+
+/*
+Where Statement
+=,<>,<, >, And, Or, Like, Null, Not Null, In, %
+*/
+
+select *
+from EmployeeDemographics
+Where FirstName ='Jim'
+
+/* 
+ <> Does not comtains 'Jim' 
+*/
+
+select *
+from EmployeeDemographics
+Where FirstName <>'Jim'
+
+select *
+from EmployeeDemographics
+Where Age > 30
+
+select *
+from EmployeeDemographics
+Where Age >= 30
+
+select *
+from EmployeeDemographics
+Where Age <= 30
+
+select *
+from EmployeeDemographics
+Where Age <= 32 AND Gender='Male'
+
+select *
+from EmployeeDemographics
+Where Age <= 32 OR Gender='Male'
+
+
+/* Return whose lastname starts with 'S'  
+ % - called wildcard
+ 'S%' - strats with S
+ '%S% - contains S (it can be anywhere in the text)
+ can add multiple conditions e.g. 'S%t%' or 'S%ott%' or 'S%c%ott%'
+ */
+
+select *
+from EmployeeDemographics
+Where LastName LIKE 'S%'
+
+select *
+from EmployeeDemographics
+Where LastName LIKE 'S%'
+
+select *
+from EmployeeDemographics
+Where LastName is NULL
+
+select *
+from EmployeeDemographics
+Where LastName is NOT NULL
+
+
+/*
+ IN is very simillar to = . To put multiple condition we need to us AND with =, whereas with IN we can list the things inside a bracket as follows
+*/
+
+select *
+from EmployeeDemographics
+Where FirstName IN ('Jim', 'Michael')
+
+/*
+ Group by, Order by
+*/
+
+select *
+from EmployeeDemographics
+
+/*It's similar to distinct(only returns 1st distict value), only difference is values get grouped (rolled inside the group of distinct value).
+See the folowig 2 examples
+*/
+
+select Gender
+from EmployeeDemographics
+Group by Gender
+
+select Gender, count(Gender)
+from EmployeeDemographics
+Group by Gender
+
+select Gender, count(Gender)
+from EmployeeDemographics
+Where Age >31
+Group by Gender
+
+/* 
+ By default SQL has ASC (Ascending feature)
+*/
+
+select Gender, count(Gender) As CountGender
+from EmployeeDemographics
+Where Age >31
+Group by Gender 
+Order by CountGender DESC
+
+select Gender, count(Gender) As CountGender
+from EmployeeDemographics
+Where Age >31
+Group by Gender 
+Order by Gender 
+
+select *
+from EmployeeDemographics
+Order by Age, Gender Desc
+
+select *
+from EmployeeDemographics
+Order by Age Desc, Gender Desc
+
+/*
+We can also use column numbers intead of names. Column numbers starts from 1
+*/
+
+select *
+from EmployeeDemographics
+Order by 4 Desc, 5 Desc
+
+select *
+from EmployeeDemographics
+Order by 1 
