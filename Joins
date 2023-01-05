@@ -1,0 +1,97 @@
+/*
+ Inner Joins, Full/Left/Right Outer Joins
+*/
+
+SELECT *
+  FROM SQLTutorial.dbo.EmployeeDemographics
+
+--insert into EmployeeDemographics values
+--(1011, 'Ryan', 'Howard', 26, 'Male'),
+--(NULL, 'Holly','Flax', NULL, 'Male'),
+--(1013, 'Darryl', 'Philbin', NULL, 'Male')
+
+--insert into EmployeeSalary values
+--(1010, NULL, 47000),
+--(NULL, 'Salesman', 43000)
+
+SELECT *
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+SELECT *
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Inner Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+SELECT *
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Full Outer Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+SELECT *
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Left Outer Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+SELECT *
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Right Outer Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+SELECT EmployeeDemographics.EmployeeID, FirstName, LastName, JobTitle, Salary
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Inner Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+SELECT EmployeeSalary.EmployeeID, FirstName, LastName, JobTitle, Salary
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Inner Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+SELECT EmployeeSalary.EmployeeID, FirstName, LastName, JobTitle, Salary
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Right Outer Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+SELECT EmployeeDemographics.EmployeeID, FirstName, LastName, JobTitle, Salary
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Right Outer Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+SELECT EmployeeDemographics.EmployeeID, FirstName, LastName, JobTitle, Salary
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Left Outer Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+SELECT EmployeeSalary.EmployeeID, FirstName, LastName, JobTitle, Salary
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Left Outer Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+
+-- Find hightest paid employee
+
+SELECT EmployeeDemographics.EmployeeID, FirstName, LastName, Salary
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Inner Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+	Where FirstName <> 'Michael'
+	Order by Salary Desc
+
+-- List of Salaries for Salesman
+
+SELECT EmployeeSalary.JobTitle, Salary
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Inner Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+Where JobTitle = 'Salesman'
+Order by Salary Desc
+
+-- Avg salary for Salesman
+
+SELECT JobTitle, Avg(Salary)
+  FROM SQLTutorial.dbo.EmployeeDemographics
+  Inner Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+Where JobTitle = 'Salesman'
+Group by JobTitle
