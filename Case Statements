@@ -1,0 +1,60 @@
+/*
+Case Statements - It allows you to sppecify a condition, and then it also aloows you to specify what you want returned when that condition is met.
+*/
+
+Select FirstName, LastName, Age,
+Case
+	When Age > 30 Then 'Old'
+	Else 'Young'
+End
+From EmployeeDemographics
+Where Age is Not Null
+Order by Age
+
+--Multiple When
+
+Select FirstName, LastName, Age,
+Case
+	When Age > 30 Then 'Old'
+	When Age Between 27 And 30 Then 'Young'
+	Else 'Baby'
+End
+From EmployeeDemographics
+Where Age is Not Null
+Order by Age
+
+-- When multiple consitions meet the criteria, only first condition is going to return. In below example, since the first condition is met it retuns 'Old' and not 'Stanley' even though second condition also meets.
+Select FirstName, LastName, Age,
+Case
+	When Age > 30 Then 'Old'
+	When Age = 38 Then 'Stanley'
+	Else 'Baby'
+End
+From EmployeeDemographics
+Where Age is Not Null
+Order by Age
+
+
+-- To fix this we can change the sequence of the conditions
+Select FirstName, LastName, Age,
+Case
+	When Age = 38 Then 'Stanley'
+	When Age > 30 Then 'Old'
+	Else 'Baby'
+End
+From EmployeeDemographics
+Where Age is Not Null
+Order by Age
+
+--Use case: Calculate salaries after they get a raise
+
+SELECT FirstName, LastName, JobTitle, Salary,
+Case 
+	When JobTitle = 'Salesman' Then Salary + (Salary * .10)
+	When JobTitle = 'Accountant' Then Salary + (Salary * .05)
+	When JobTitle = 'HR' Then Salary + (Salary * .01)
+	Else Salary + (Salary * .03)
+End As SalaryAfterRaise
+FROM SQLTutorial.dbo.EmployeeDemographics
+Join EmployeeSalary 
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
