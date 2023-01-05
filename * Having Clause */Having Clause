@@ -1,0 +1,27 @@
+/*
+Having Clause
+*/
+-- Showing number of employee count by Job title, where count is more than 1. Aggregation function canot be used with Where. Hence Having clause is in place.
+
+
+Select Jobtitle, COUNT(Jobtitle) As EmployeeCount
+From EmployeeDemographics
+Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+Group by JobTitle
+Having COUNT(JobTitle) > 1
+
+
+Select Jobtitle, Avg(Salary)
+From EmployeeDemographics
+Join EmployeeSalary
+	On EmployeeDemographics.EmployeeID = EmployeeSalary.EmployeeID
+Group by JobTitle
+Having Avg(Salary) > 45000
+Order by Avg(Salary)
+
+
+/*
+Aggregate functions are not allowed because the WHERE clause is used for filtering data before aggregation. So while WHERE isn't for aggregation, it has other uses. 
+To filter data based on an aggregate function result, you must use the HAVING clause
+*/
