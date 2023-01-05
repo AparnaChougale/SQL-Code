@@ -1,6 +1,10 @@
 /*
  Inner Joins, Full/Left/Right Outer Joins
+ 
+ A join combines two tables based on a common column
+ 
 */
+
 
 SELECT *
   FROM SQLTutorial.dbo.EmployeeDemographics
