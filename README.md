@@ -14,5 +14,10 @@ Intermediate SQL Queries:
 - Inner Joins  
 - Full/Left/Right Outer Joins  
 - Union, Union All  
+- Case Statements  
+- Having Clause
+- Updating/Deleting Data 
+- Aliasing  
+- Partition By
 
 
