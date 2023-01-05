@@ -1,0 +1,43 @@
+/*
+Union, Union All
+
+Union is simillar to Joins. The difference is, it combines two tables without spliting it different columns like join.
+It should be used on same type of data and number of column. E.g. We have same data in 'EmployeeDemographics' and 'WareHouseEmployeeDemographics' table
+
+Union removes duplicates, Union All shows all
+
+
+*/
+
+Create table WareHouseEmployeeDemographics
+(EmployeeID int, 
+FirstName varchar(50), 
+LastName varchar(50), 
+Age int, 
+Gender varchar(50)
+)
+
+Insert into WareHouseEmployeeDemographics VALUES
+(1013, 'Darryl', 'Philbin', NULL, 'Male'),
+(1050, 'Roy', 'Anderson', 31, 'Male'),
+(1051, 'Hidetoshi', 'Hasagawa', 40, 'Male'),
+(1052, 'Val', 'Johnson', 31, 'Female')
+
+Select *
+From EmployeeDemographics
+Full Outer Join WareHouseEmployeeDemographics
+	On EmployeeDemographics.EmployeeID = WareHouseEmployeeDemographics.EmployeeID
+
+Select *
+From EmployeeDemographics
+Union
+Select *
+From WareHouseEmployeeDemographics
+
+Select *
+From EmployeeDemographics
+Union All
+Select *
+From WareHouseEmployeeDemographics
+Order by EmployeeID
+	
